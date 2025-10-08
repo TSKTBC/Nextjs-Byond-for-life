@@ -1,17 +1,18 @@
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV === 'development';
+const isVercel = process.env.VERCEL === '1';
 
 const nextConfig: NextConfig = {
-  // 開発環境ではAPI routesを使用可能にする
-  ...(isDev ? {} : {
+  // Vercelでは動的機能を使用、それ以外では静的エクスポート
+  ...(isDev || isVercel ? {} : {
     output: 'export',
     trailingSlash: true,
   }),
 
-  // 画像最適化（開発環境でのみ最適化を有効化）
+  // 画像最適化（開発環境・Vercelでは最適化を有効化）
   images: {
-    unoptimized: !isDev, // 開発環境では最適化を有効、本番（export）では無効
+    unoptimized: !isDev && !isVercel, // Vercelと開発環境では最適化を有効
     remotePatterns: [
       {
         protocol: 'https',
