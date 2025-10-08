@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd web/study-abroad-platform && npm run build",
+  "outputDirectory": "web/study-abroad-platform/.next",
+  "installCommand": "cd web/study-abroad-platform && npm install",
+  "framework": "nextjs",
+  "rootDirectory": "web/study-abroad-platform"
+}
